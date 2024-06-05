@@ -52,11 +52,11 @@ class _HomeState extends State<Home> {
                       controller: _scrollController,
                       children: [
                         Container(
-                          margin: EdgeInsets.only(
+                          margin: const EdgeInsets.only(
                             top: 50,
                             bottom: 20,
                           ),
-                          child: Text(
+                          child: const Text(
                             'All ToDos',
                             style: TextStyle(
                               fontSize: 30,
@@ -70,7 +70,10 @@ class _HomeState extends State<Home> {
                             onToDoChanged: _handleToDoChange,
                             onDeleteItem: _deleteToDoItem,
                           ),
-                      ],
+                          const SizedBox(height: 60)
+
+                           ],
+
                     ),
                   ),
                 )
