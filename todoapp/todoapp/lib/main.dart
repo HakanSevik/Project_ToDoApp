@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_todo_app/firebase_options.dart';
 import './screens/home.dart';
+import './screens/login_home.dart'; // Importiert die Login Start seite
+import './services/auth.dart'; // Importiere den Auth
+
+
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,3 +30,31 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
+class AuthWrapper extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context);
+
+    return StreamBuilder<User?>(
+      stream: authService.user,
+      builder: (_, AsyncSnapshot<User?> snapshot) {
+        if (snapshot.connectionState == ConnectionState.active) {
+          final User? user = snapshot.data;
+          return user == null ? LoginPage() : Home();
+        } else {
+          return Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        }
+      },
+    );
+  }
+}
+
+
+
+
